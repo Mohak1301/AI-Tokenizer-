@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Tokenizer with Tiktoken</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-code"></i> Advanced Tokenizer</h1>
+        </header>
+
+        <div class="main-content">
+            <!-- Learning Section -->
+            <section class="card learning-section">
+                <h2><i class="fas fa-graduation-cap"></i> Learn Vocabulary</h2>
+                <div class="form-group">
+                    <label for="trainingText">Training Text:</label>
+                    <textarea id="trainingText" placeholder="Enter text to learn vocabulary from...&#10;&#10;Example:&#10;The quick brown fox jumps over the lazy dog. This is a sample text for training the tokenizer. The tokenizer will learn new words and build its vocabulary."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="minFrequency">Minimum Frequency:</label>
+                    <input type="number" id="minFrequency" value="1" min="1" max="10">
+                </div>
+                <button id="learnBtn" class="btn btn-primary">
+                    <i class="fas fa-brain"></i> Learn Vocabulary
+                </button>
+                <div id="learningResult" class="result-box"></div>
+            </section>
+
+            <!-- Encoding Section -->
+            <section class="card encoding-section">
+                <h2><i class="fas fa-arrow-right"></i> Encode Text</h2>
+                <div class="form-group">
+                    <label for="encodeText">Text to Encode:</label>
+                    <textarea id="encodeText" placeholder="Enter text to encode into tokens..."></textarea>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="addSpecialTokens" checked>
+                        <span class="checkmark"></span>
+                        Add Special Tokens
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="useSubword">
+                        <span class="checkmark"></span>
+                        Use Subword Tokenization
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="useTiktoken">
+                        <span class="checkmark"></span>
+                        Use Tiktoken (GPT-3.5)
+                    </label>
+                </div>
+                <button id="encodeBtn" class="btn btn-success">
+                    <i class="fas fa-encode"></i> Encode
+                </button>
+                <div id="encodeResult" class="result-box"></div>
+            </section>
+
+            <!-- Decoding Section -->
+            <section class="card decoding-section">
+                <h2><i class="fas fa-arrow-left"></i> Decode Tokens</h2>
+                <div class="form-group">
+                    <label for="decodeTokens">Tokens to Decode:</label>
+                    <textarea id="decodeTokens" placeholder="Enter token IDs separated by commas...&#10;Example: 2, 15, 8, 3"></textarea>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="removeSpecialTokens" checked>
+                        <span class="checkmark"></span>
+                        Remove Special Tokens
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="useTiktokenDecode">
+                        <span class="checkmark"></span>
+                        Use Tiktoken Decoding
+                    </label>
+                </div>
+                <button id="decodeBtn" class="btn btn-info">
+                    <i class="fas fa-decode"></i> Decode
+                </button>
+                <div id="decodeResult" class="result-box"></div>
+            </section>
+
+            <!-- Special Tokens Section -->
+            <section class="card special-tokens-section">
+                <h2><i class="fas fa-star"></i> Special Tokens</h2>
+                <div class="form-group">
+                    <label for="newSpecialToken">New Special Token:</label>
+                    <input type="text" id="newSpecialToken" placeholder="Enter special token (e.g., <MASK>)">
+                </div>
+                <div class="form-group">
+                    <label for="specialTokenId">Token ID (optional):</label>
+                    <input type="number" id="specialTokenId" placeholder="Leave empty for auto-assignment">
+                </div>
+                <button id="addSpecialTokenBtn" class="btn btn-warning">
+                    <i class="fas fa-plus"></i> Add Special Token
+                </button>
+                <div id="specialTokensResult" class="result-box"></div>
+            </section>
+
+            <!-- Vocabulary Section -->
+            <section class="card vocabulary-section">
+                <h2><i class="fas fa-book"></i> Vocabulary</h2>
+                <div class="vocab-controls">
+                    <button id="loadVocabBtn" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Load Vocabulary
+                    </button>
+                    <button id="saveVocabBtn" class="btn btn-secondary">
+                        <i class="fas fa-save"></i> Save Vocabulary
+                    </button>
+                    <button id="resetVocabBtn" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Reset
+                    </button>
+                </div>
+                <div id="vocabStats" class="stats-box">
+                    <div class="stat-item">
+                        <span class="stat-label">Vocabulary Size:</span>
+                        <span id="vocabSize" class="stat-value">5</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Special Tokens:</span>
+                        <span id="specialTokensCount" class="stat-value">5</span>
+                    </div>
+                </div>
+                <div id="vocabularyDisplay" class="vocabulary-display"></div>
+            </section>
+
+            <!-- Comparison Section -->
+            <section class="card comparison-section">
+                <h2><i class="fas fa-balance-scale"></i> Tokenization Comparison</h2>
+                <div class="form-group">
+                    <label for="compareText">Text to Compare:</label>
+                    <textarea id="compareText" placeholder="Enter text to compare different tokenization methods..."></textarea>
+                </div>
+                <button id="compareBtn" class="btn btn-purple">
+                    <i class="fas fa-chart-bar"></i> Compare Methods
+                </button>
+                <div id="comparisonResult" class="result-box"></div>
+            </section>
+        </div>
+
+        <!-- File Upload Modal -->
+        <div id="fileModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Load Vocabulary</h3>
+                <input type="file" id="fileInput" accept=".json">
+                <button id="loadFileBtn" class="btn btn-primary">Load File</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

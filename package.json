@@ -1,0 +1,22 @@
+{
+  "name": "custom-tokenizer",
+  "version": "1.0.0",
+  "description": "A custom tokenizer that learns vocabulary from text with web interface",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "tiktoken": "^1.0.11"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": ["tokenizer", "nlp", "javascript", "web", "tiktoken"],
+  "author": "",
+  "license": "MIT"
+}
