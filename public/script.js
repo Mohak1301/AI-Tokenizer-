@@ -1,5 +1,5 @@
-// API base URL
-const API_BASE = '';
+// API base URL - use relative paths for same-origin requests
+const API_BASE = '/api';
 
 // DOM elements
 const elements = {
