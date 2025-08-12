@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Error handling middleware
 const errorHandler = (err, req, res, next) => {
@@ -26,7 +26,13 @@ const errorHandler = (err, req, res, next) => {
 
 // Routes
 app.get('/', (req, res) => {
+  console.log('Serving index.html from:', path.join(__dirname, 'public', 'index.html'));
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Test route to check if server is working
+app.get('/test', (req, res) => {
+  res.json({ message: 'Server is working!', timestamp: new Date().toISOString() });
 });
 
 // API routes
